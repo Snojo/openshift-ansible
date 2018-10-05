@@ -18,9 +18,9 @@ c3qlabcoordinator04.c3.amadis.com
 c3qlabmaster03.c3.amadis.com
 c3qlabcoordinator05.c3.amadis.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
 c3qlabcoordinator06.c3.amadis.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
-c3qlabworker04.c3.amadis.com openshift_node_labels="{'region': 'primary', 'zone': 'east'}"
-c3qlabworker05.c3.amadis.com openshift_node_labels="{'region': 'primary', 'zone': 'east'}"
-c3qlabworker06.c3.amadis.com openshift_node_labels="{'region': 'primary', 'zone': 'east'}"
+#c3qlabworker04.c3.amadis.com openshift_node_labels="{'region': 'primary', 'zone': 'default'}"
+c3qlabworker05.c3.amadis.com openshift_node_labels="{'region': 'primary', 'zone': 'default'}"
+c3qlabworker06.c3.amadis.com openshift_node_labels="{'region': 'primary', 'zone': 'default'}"
 
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
