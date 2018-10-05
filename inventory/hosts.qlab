@@ -41,6 +41,11 @@ ansible_user=ansible
 # user must be configured for passwordless sudo
 ansible_become=true
 
+openshift_install_examples=true
+openshift_hosted_router_selector='region=infra'
+openshift_hosted_registry_selector='region=infra'
+osm_default_node_selector='region=primary'
+
 # Specify the deployment type. Valid values are origin and openshift-enterprise.
 openshift_deployment_type=origin
 #openshift_deployment_type=openshift-enterprise
@@ -55,7 +60,7 @@ openshift_deployment_type=origin
 # default subdomain to use for exposed routes, you should have wildcard dns
 # for *.apps.test.example.com that points at your infra nodes which will run
 # your router
-#openshift_master_default_subdomain=c3qlab.c3.amadis.com
+openshift_master_default_subdomain=c3qlab.c3.amadis.com
 
 #Set cluster_hostname to point at your load balancer
 #openshift_master_cluster_hostname=c3qlabmaster.c3.amadis.com
