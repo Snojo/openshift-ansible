@@ -4,8 +4,9 @@
 # balance traffic to the API servers. For a truly production environment you
 # should use an external load balancing solution that itself is highly available.
 
+
 [masters]
-c3qlabmaster03.c3.amadis.com
+c3qlabmaster03.c3.amadis.com openshift_node_group_name='node-config-master'
 
 
 [etcd]
@@ -16,11 +17,11 @@ c3qlabcoordinator04.c3.amadis.com
 
 [nodes]
 c3qlabmaster03.c3.amadis.com
-c3qlabcoordinator05.c3.amadis.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
-c3qlabcoordinator06.c3.amadis.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
+c3qlabcoordinator05.c3.amadis.com openshift_node_group_name='node-config-infra'
+c3qlabcoordinator06.c3.amadis.com openshift_node_group_name='node-config-infra'
 #c3qlabworker04.c3.amadis.com openshift_node_labels="{'region': 'primary', 'zone': 'default'}"
-c3qlabworker05.c3.amadis.com openshift_node_labels="{'region': 'primary', 'zone': 'default'}"
-c3qlabworker06.c3.amadis.com openshift_node_labels="{'region': 'primary', 'zone': 'default'}"
+c3qlabworker05.c3.amadis.com openshift_node_group_name='node-config-compute'
+c3qlabworker06.c3.amadis.com openshift_node_group_name='node-config-compute'
 
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
@@ -32,6 +33,11 @@ etcd
 ###############################################################################
 # Common/ Required configuration variables follow                             #
 ###############################################################################
+
+
+openshift_node_groups=[{'name': 'node-config-master', 'labels': ['node-role.kubernetes.io/master=true']}, {'name': 'node-config-infra', 'labels': ['node-role.kubernetes.io/infra=true']}, {'name': 'node-config-compute', 'labels': ['node-role.kubernetes.io/compute=true']}]
+
+
 # SSH user, this user should allow ssh based auth without requiring a
 # password. If using ssh key based auth, then the key should be managed by an
 # ssh agent.
