@@ -5,29 +5,28 @@
 # should use an external load balancing solution that itself is highly available.
 
 [masters]
-ose3-master[1:3].test.example.com
+c3qlabmaster03.c3.amadis.com
+
 
 [etcd]
-ose3-master[1:3].test.example.com
+#ose3-master[1:3].test.example.com
+c3qlabcoordinator04.c3.amadis.com
+
+
 
 [nodes]
-ose3-master[1:3].test.example.com
-ose3-infra[1:2].test.example.com
-ose3-node[1:2].test.example.com
-
-[nfs]
-ose3-master1.test.example.com
-
-[lb]
-ose3-lb.test.example.com
+c3qlabmaster03.c3.amadis.com
+c3qlabcoordinator05.c3.amadis.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
+c3qlabcoordinator06.c3.amadis.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
+c3qlabworker04.c3.amadis.com openshift_node_labels="{'region': 'primary', 'zone': 'east'}"
+c3qlabworker05.c3.amadis.com openshift_node_labels="{'region': 'primary', 'zone': 'east'}"
+c3qlabworker06.c3.amadis.com openshift_node_labels="{'region': 'primary', 'zone': 'east'}"
 
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
 masters
 nodes
 etcd
-lb
-nfs
 
 [OSEv3:vars]
 ###############################################################################
@@ -36,11 +35,11 @@ nfs
 # SSH user, this user should allow ssh based auth without requiring a
 # password. If using ssh key based auth, then the key should be managed by an
 # ssh agent.
-ansible_user=root
+ansible_user=ansible
 
 # If ansible_user is not root, ansible_become must be set to true and the
 # user must be configured for passwordless sudo
-#ansible_become=yes
+ansible_become=true
 
 # Specify the deployment type. Valid values are origin and openshift-enterprise.
 openshift_deployment_type=origin
@@ -56,10 +55,10 @@ openshift_deployment_type=origin
 # default subdomain to use for exposed routes, you should have wildcard dns
 # for *.apps.test.example.com that points at your infra nodes which will run
 # your router
-openshift_master_default_subdomain=apps.test.example.com
+#openshift_master_default_subdomain=c3qlab.c3.amadis.com
 
 #Set cluster_hostname to point at your load balancer
-openshift_master_cluster_hostname=ose3-lb.test.example.com
+#openshift_master_cluster_hostname=c3qlabmaster.c3.amadis.com
 
 
 
