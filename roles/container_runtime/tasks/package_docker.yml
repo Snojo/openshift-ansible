@@ -168,7 +168,7 @@
 - name: Fixup SELinux permissions for docker
   shell: |
            semanage fcontext -a -e /var/lib/docker/overlay2 "{{ docker_storage_path }}/overlay2"
-           /usr/sbin/restorecon -R -v "{{ docker_storage_path }}/overlay2"
+           /usr/sbin/restorecon -R -v "/var/lib/docker/overlay2"
   environment:
        PATH: "{{ ansible_env.PATH}}:/usr/sbin:/sbin"           
   when: dsp_stat.stat.exists
