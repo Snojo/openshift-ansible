@@ -169,8 +169,9 @@
   shell: |
            semanage fcontext -a -e /var/lib/docker/overlay2 "{{ docker_storage_path }}/overlay2"
            restorecon -R -v "{{ docker_storage_path }}/overlay2"
-  when: dsp_stat.stat.exists
   environment:
-       PATH: "{{ ansible_env.PATH}}:/sbin:/usr/sbin"
+       PATH: "{{ ansible_env.PATH}}:/usr/sbin:/sbin"           
+  when: dsp_stat.stat.exists
+  
 
 - import_tasks: common/post.yml
