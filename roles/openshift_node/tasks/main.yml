@@ -43,7 +43,7 @@
 # swapoff is a custom module in lib_utils that comments out swap entries in
 # /etc/fstab and runs swapoff -a, if necessary.
 - name: Disable swap
-  swapoff: {}
+  import_tasks: 0010-swapoff.yml
   when: openshift_disable_swap | default(true) | bool
 
 # The atomic-openshift-node service will set this parameter on
