@@ -38,6 +38,11 @@
 - name: Update journald config
   import_tasks: journald.yml
 
+- name: Enable Selinux in Permissive Mode
+  selinux:
+    policy: targeted
+    state: permissive
+
 #### Disable SWAP #####
 # https://docs.openshift.com/container-platform/3.4/admin_guide/overcommit.html#disabling-swap-memory
 # swapoff is a custom module in lib_utils that comments out swap entries in
