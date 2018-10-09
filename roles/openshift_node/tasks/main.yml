@@ -42,6 +42,7 @@
   selinux:
     policy: targeted
     state: permissive
+  ignore_errors: yes
 
 #### Disable SWAP #####
 # https://docs.openshift.com/container-platform/3.4/admin_guide/overcommit.html#disabling-swap-memory
