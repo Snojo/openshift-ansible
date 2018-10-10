@@ -124,28 +124,28 @@
   when: etcd_server_certs_missing | bool
   delegate_to: "{{ etcd_ca_host }}"
 
-- name: Retrieve etcd cert tarball
-  fetch:
-    src: "{{ etcd_generated_certs_dir }}/{{ etcd_cert_subdir }}.tgz"
-    dest: "/tmp"
-    fail_on_missing: no
-    validate_checksum: yes
-  when: etcd_server_certs_missing | bool
-  delegate_to: "{{ etcd_ca_host }}"
+# - name: Retrieve etcd cert tarball
+#   fetch:
+#     src: "{{ etcd_generated_certs_dir }}/{{ etcd_cert_subdir }}.tgz"
+#     dest: "/tmp"
+#     fail_on_missing: no
+#     validate_checksum: yes
+#   when: etcd_server_certs_missing | bool
+#   delegate_to: "{{ etcd_ca_host }}"
 
-- name: Ensure certificate directory exists
-  file:
-    path: "{{ item }}"
-    state: directory
-  with_items:
-  - "{{ etcd_cert_config_dir }}"
-  when: etcd_server_certs_missing | bool
+# - name: Ensure certificate directory exists
+#   file:
+#     path: "{{ item }}"
+#     state: directory
+#   with_items:
+#   - "{{ etcd_cert_config_dir }}"
+#   when: etcd_server_certs_missing | bool
 
-- name: Unarchive cert tarball
-  unarchive:
-    src: "/tmp/{{ inventory_hostname }}/{{ etcd_generated_certs_dir }}/{{ etcd_cert_subdir }}.tgz"
-    dest: "{{ etcd_cert_config_dir }}"
-  when: etcd_server_certs_missing | bool
+# - name: Unarchive cert tarball
+#   unarchive:
+#     src: "/tmp/{{ inventory_hostname }}/{{ etcd_generated_certs_dir }}/{{ etcd_cert_subdir }}.tgz"
+#     dest: "{{ etcd_cert_config_dir }}"
+#   when: etcd_server_certs_missing | bool
 
 - name: Create a tarball of the etcd ca certs
   command: >
