@@ -102,7 +102,7 @@
 - name: Retrieve the etcd cert tarballs
   fetch:
     src: "{{ etcd_generated_certs_dir }}/{{ etcd_cert_subdir }}.tgz"
-    dest: "/tmp"
+    dest: "/home/ansible"
     fail_on_missing: yes
     validate_checksum: yes
   when: etcd_client_certs_missing | bool
@@ -116,12 +116,12 @@
 
 - name: Unarchive etcd cert tarballs
   unarchive:
-    src: "/tmp/{{ inventory_hostname }}/{{ etcd_generated_certs_dir }}/{{ etcd_cert_subdir }}.tgz"
+    src: "/home/ansible/{{ inventory_hostname }}/{{ etcd_generated_certs_dir }}/{{ etcd_cert_subdir }}.tgz"
     dest: "{{ etcd_cert_config_dir }}"
   when: etcd_client_certs_missing | bool
 
 - name: Delete temporary directory
-  local_action: file path="/tmp/{{ inventory_hostname }}" state=absent
+  local_action: file path="/home/ansible/{{ inventory_hostname }}" state=absent
   changed_when: False
   when: etcd_client_certs_missing | bool
 
