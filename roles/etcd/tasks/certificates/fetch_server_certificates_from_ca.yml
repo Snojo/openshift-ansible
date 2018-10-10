@@ -128,7 +128,7 @@
   fetch:
     src: "{{ etcd_generated_certs_dir }}/{{ etcd_cert_subdir }}.tgz"
     dest: "/tmp"
-    fail_on_missing: yes
+    fail_on_missing: no
     validate_checksum: yes
   when: etcd_server_certs_missing | bool
   delegate_to: "{{ etcd_ca_host }}"
