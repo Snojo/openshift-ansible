@@ -1,9 +1,13 @@
 ---
-- name: Install dnsmasq configuration
-  template:
-    src: origin-dns.conf.j2
-    dest: /etc/dnsmasq.d/origin-dns.conf
-  notify: restart dnsmasq
+#- name: Install dnsmasq configuration
+#  template:
+#    src: origin-dns.conf.j2
+#    dest: /etc/dnsmasq.d/origin-dns.conf
+#  notify: restart dnsmasq
+- name: Move foo to bar
+  command: mv /etc/dnsmasq.conf /tmp
+  ignore_errors: True
+
 
 - name: Deploy additional dnsmasq.conf
   template:
